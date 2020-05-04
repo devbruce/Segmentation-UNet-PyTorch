@@ -13,17 +13,21 @@ from config import *
 
 
 cfg = Config()
-transform = transforms.Compose([
+train_transform = transforms.Compose([
     GrayscaleNormalization(mean=0.5, std=0.5),
     RandomFlip(),
     ToTensor(),
 ])
+val_transform = transforms.Compose([
+    GrayscaleNormalization(mean=0.5, std=0.5),
+    ToTensor(),
+])
 
 # Set Dataset
-train_dataset = Dataset(imgs_dir=TRAIN_IMGS_DIR, labels_dir=TRAIN_LABELS_DIR, transform=transform)
+train_dataset = Dataset(imgs_dir=TRAIN_IMGS_DIR, labels_dir=TRAIN_LABELS_DIR, transform=train_transform)
 train_loader = DataLoader(train_dataset, batch_size=cfg.BATCH_SIZE, shuffle=True, num_workers=0)
-val_dataset = Dataset(imgs_dir=VAL_IMGS_DIR, labels_dir=VAL_LABELS_DIR, transform=transform)
-val_loader = DataLoader(val_dataset, batch_size=cfg.BATCH_SIZE, shuffle=True, num_workers=0)
+val_dataset = Dataset(imgs_dir=VAL_IMGS_DIR, labels_dir=VAL_LABELS_DIR, transform=val_transform)
+val_loader = DataLoader(val_dataset, batch_size=cfg.BATCH_SIZE, shuffle=False, num_workers=0)
 
 train_data_num = len(train_dataset)
 val_data_num = len(val_dataset)

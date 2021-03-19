@@ -41,7 +41,7 @@ ISBI2012
 └── test-volume.tif --> (Not Necessary)
 ```
 
-- Split Data to train, val, test with [data_prep.ipynb]()
+- Split Data to train, val, test with [data_prep.ipynb](./data_prep.ipynb)
 
 <br>
 
